@@ -14,3 +14,22 @@ export const getPosts = () => async (dispatch) => {
     console.error(error.message);
   }
 };
+
+export const createPost = (post) => async (dispatch) => {
+  try {
+    const { data } = await api.createPost(post);
+    console.log('createPost action-creator');
+    dispatch({ type: 'CREATE', payload: data });
+  } catch (error) {
+    console.log(error);
+  }
+};
+export const updatePost = (id, post) => async (dispatch) => {
+  try {
+    const { data } = await api.updatePost(id, post);
+    console.log('updatePost action-creator');
+    dispatch({ type: 'UPDATE', payload: data });
+  } catch (error) {
+    console.log(error);
+  }
+};

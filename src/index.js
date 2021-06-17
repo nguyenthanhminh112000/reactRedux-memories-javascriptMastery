@@ -5,10 +5,11 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import App from './App.js';
+//import styles
+import './index.css';
 //import reducer
 import allReducers from './reducers/index.js';
 console.log('Index outside');
-
 const store = createStore(
   allReducers,
   compose(

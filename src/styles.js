@@ -19,7 +19,7 @@ import { makeStyles } from '@material-ui/core/styles';
 // }));
 
 export default makeStyles(() => {
-  console.log('Hello to styles');
+  console.log('Welcome from styles');
   return {
     appBar: {
       borderRadius: 15,
