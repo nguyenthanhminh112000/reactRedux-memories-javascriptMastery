@@ -19,6 +19,7 @@ const Form = ({ currentId, setCurrentId }) => {
   const post = useSelector((state) =>
     currentId ? state.posts.find((p) => p._id === currentId) : null
   );
+  const post2 = useSelector((state) => state.posts);
   useEffect(() => {
     console.log('Form inside useEffect ');
     if (post) {

@@ -1,3 +1,4 @@
+//import dependencies
 import React, { useEffect } from 'react';
 import {
   Card,
@@ -11,13 +12,16 @@ import moment from 'moment';
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import DeleteIcon from '@material-ui/icons/Delete';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
-// import styles
+import { useDispatch } from 'react-redux';
+// import files
 import useStyles from './styles.js';
+import { deletePost } from './../../../actions/index.js';
 console.log('Post outside');
 const Post = ({ post, setCurrentId }) => {
   //using hooks
   console.log('Post inside');
   console.log(post);
+  const dispatch = useDispatch();
   useEffect(() => {
     console.log('Post inside useEffect');
   }, []);
@@ -26,6 +30,9 @@ const Post = ({ post, setCurrentId }) => {
   const handleSomething = () => {};
   const handleChangeCurrentId = () => {
     setCurrentId(post._id);
+  };
+  const handleDeletePost = () => {
+    dispatch(deletePost(post._id));
   };
   return (
     <Card className={classes.card}>
@@ -67,7 +74,7 @@ const Post = ({ post, setCurrentId }) => {
         <Button size='small' color='primary' onClick={() => {}}>
           <ThumbUpAltIcon fontSize='small' /> Like {post.likeCount}{' '}
         </Button>
-        <Button size='small' color='primary' onClick={() => {}}>
+        <Button size='small' color='primary' onClick={handleDeletePost}>
           <DeleteIcon fontSize='small' /> Delete
         </Button>
       </CardActions>
