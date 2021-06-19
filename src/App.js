@@ -18,7 +18,7 @@ const App = () => {
   useEffect(() => {
     console.log('App inside useEffect ');
     dispatch(getPosts());
-  }, []);
+  }, [dispatch]);
   console.log('App inside');
   const classes = useStyles();
   // write functions

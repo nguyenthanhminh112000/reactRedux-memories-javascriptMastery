@@ -15,7 +15,8 @@ import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import { useDispatch } from 'react-redux';
 // import files
 import useStyles from './styles.js';
-import { deletePost } from './../../../actions/index.js';
+import { deletePost, likePost } from './../../../actions/index.js';
+import defaultPostImage from './../../../images/defaultPost.png';
 console.log('Post outside');
 const Post = ({ post, setCurrentId }) => {
   //using hooks
@@ -27,20 +28,22 @@ const Post = ({ post, setCurrentId }) => {
   }, []);
   const classes = useStyles();
   //write functions and features
-  const handleSomething = () => {};
+
   const handleChangeCurrentId = () => {
     setCurrentId(post._id);
   };
   const handleDeletePost = () => {
     dispatch(deletePost(post._id));
   };
+  const handleLikePost = () => {
+    dispatch(likePost(post._id));
+  };
   return (
     <Card className={classes.card}>
       {console.log('Post inside return')}
       <CardMedia
         className={classes.media}
-        image={post.selectedFile}
-        title={post.title}
+        image={post.selectedFile || defaultPostImage}
       />
       <div className={classes.overlay}>
         <Typography variant='h6'>{post.creator}</Typography>
@@ -57,22 +60,26 @@ const Post = ({ post, setCurrentId }) => {
           <MoreHorizIcon fontSize='default' />
         </Button>
       </div>
+
+      <div>
+        <Typography variant='h5' className={classes.title} gutterBottom>
+          {post.title}
+        </Typography>
+      </div>
       <div className={classes.details}>
         <Typography variant='body2' color='textSecondary'>
           {post.tags.map((tag) => `#${tag} `)}
         </Typography>
       </div>
-      <Typography variant='h5' className={classes.title} gutterBottom>
-        {post.title}
-      </Typography>
       <CardContent>
-        <Typography variant='h5' gutterBottom>
+        <Typography variant='body2' color='textSecondary' component='p'>
           {post.message}
         </Typography>
       </CardContent>
       <CardActions className={classes.cardActions}>
-        <Button size='small' color='primary' onClick={() => {}}>
-          <ThumbUpAltIcon fontSize='small' /> Like {post.likeCount}{' '}
+        <Button size='small' color='primary' onClick={handleLikePost}>
+          <ThumbUpAltIcon fontSize='small' />
+          &nbsp; Like {post.likeCount}
         </Button>
         <Button size='small' color='primary' onClick={handleDeletePost}>
           <DeleteIcon fontSize='small' /> Delete

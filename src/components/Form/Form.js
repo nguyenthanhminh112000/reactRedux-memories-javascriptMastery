@@ -15,11 +15,12 @@ const Form = ({ currentId, setCurrentId }) => {
     message: '',
     tags: [],
     selectedFile: '',
+    idk: ['Nguyen T Minh', 'T dat', 'T hien'],
   });
   const post = useSelector((state) =>
     currentId ? state.posts.find((p) => p._id === currentId) : null
   );
-  const post2 = useSelector((state) => state.posts);
+
   useEffect(() => {
     console.log('Form inside useEffect ');
     if (post) {
@@ -30,8 +31,22 @@ const Form = ({ currentId, setCurrentId }) => {
   const classes = useStyles();
   console.log('Form inside');
   // write functions
+  // const handleValidForm = () => {
+  //   setPostData({
+  //     ...postData,
+  //     tags: postData.tags.map((tag) => tag.replaceAll(' ', '')),
+  //   });
+
+  //   for (let i = 0; i < postData.length; i++) {
+  //     if (!postData.tags[i]) {
+  //       postData.splice(i);
+  //     }
+  //   }
+  //   console.log('------------------From handleValidForm', postData);
+  // };
   const handleSubmit = (e) => {
     e.preventDefault();
+    // handleValidForm();
     if (currentId) {
       dispatch(updatePost(currentId, postData));
     } else {
@@ -52,7 +67,11 @@ const Form = ({ currentId, setCurrentId }) => {
         setPostData({ ...postData, message: e.target.value });
         break;
       case 'tags':
-        setPostData({ ...postData, tags: e.target.value });
+        setPostData({
+          ...postData,
+          tags: e.target.value.split(','),
+        });
+
         break;
       default:
         break;
@@ -105,14 +124,6 @@ const Form = ({ currentId, setCurrentId }) => {
             onChange={handleFormChange}
           />
           <TextField
-            name='message'
-            variant='outlined'
-            label='Message'
-            fullWidth
-            value={postData.message}
-            onChange={handleFormChange}
-          />
-          <TextField
             name='tags'
             variant='outlined'
             label='Tags'
@@ -120,6 +131,15 @@ const Form = ({ currentId, setCurrentId }) => {
             value={postData.tags}
             onChange={handleFormChange}
           />
+          <TextField
+            name='message'
+            variant='outlined'
+            label='Message'
+            fullWidth
+            value={postData.message}
+            onChange={handleFormChange}
+          />
+
           <div className={classes.fileInput}>
             <FileBase type='file' multiple={false} onDone={handleFileInput} />
           </div>
