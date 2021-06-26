@@ -3,5 +3,5 @@ import { combineReducers } from 'redux';
 
 // import reducers
 import postsReducer from './posts.js';
-
-export default combineReducers({ posts: postsReducer });
+import authReducer from './auth.js';
+export default combineReducers({ posts: postsReducer, auth: authReducer });

@@ -92,7 +92,6 @@ const Form = ({ currentId, setCurrentId }) => {
     });
     setCurrentId(null);
   };
-  console.log(postData);
   return (
     <div>
       {console.log('Form inside return')}
