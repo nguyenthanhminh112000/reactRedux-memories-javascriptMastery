@@ -3,7 +3,7 @@ import { TextField, Typography, Paper, Button } from '@material-ui/core';
 import FileBase from 'react-file-base64';
 import { useDispatch, useSelector } from 'react-redux';
 // import files
-import { createPost, updatePost } from './../../actions/index.js';
+import { createPost, updatePost } from './../../actions/posts.js';
 // import styles
 import useStyles from './styles.js';
 console.log('Form outside');

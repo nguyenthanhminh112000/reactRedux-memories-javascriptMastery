@@ -7,7 +7,7 @@ import Form from './../../components/Form/Form.js';
 import Posts from './../../components/Posts/Posts.js';
 //// import files
 // import useStyle from './styles.js';
-import { getPosts } from '../../actions/index.js';
+import { getPosts } from '../../actions/posts.js';
 console.log('Home outside');
 const Home = () => {
   //   const classes = useStyle();

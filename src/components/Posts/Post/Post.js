@@ -15,13 +15,12 @@ import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import { useDispatch } from 'react-redux';
 // import files
 import useStyles from './styles.js';
-import { deletePost, likePost } from './../../../actions/index.js';
+import { deletePost, likePost } from './../../../actions/posts.js';
 import defaultPostImage from './../../../images/defaultPost.png';
 console.log('Post outside');
 const Post = ({ post, setCurrentId }) => {
   //using hooks
   console.log('Post inside');
-  console.log(post);
   const dispatch = useDispatch();
   useEffect(() => {
     console.log('Post inside useEffect');

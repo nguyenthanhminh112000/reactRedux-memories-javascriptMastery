@@ -12,7 +12,6 @@ const Navbar = () => {
   const user = useSelector((state) => state.auth?.authData);
   // const [user, setUser] = useState({ authData });
   const dispatch = useDispatch();
-
   useEffect(() => {
     console.log('Navbar inside useEffect');
     ////

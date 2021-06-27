@@ -6,7 +6,6 @@ import {
   Grid,
   Typography,
   Container,
-  TextField,
 } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { GoogleLogin } from 'react-google-login';
@@ -16,21 +15,38 @@ import { useHistory } from 'react-router-dom';
 import useStyles from './styles';
 import Input from './Input.js';
 import Icon from './Icon.js';
-
+import { signin, signup } from '../../actions/auth.js';
 console.log('Auth outside');
+const initialState = {
+  firstName: '',
+  lastName: '',
+  email: '',
+  password: '',
+  confirmPassword: '',
+};
 const Auth = () => {
   //// using hooks
-  const [showPassword, setShowPassword] = useState(false);
   const [isSignup, setIsSignup] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [formData, setFormData] = useState(initialState);
   const classes = useStyles();
+  const history = useHistory();
+  const dispatch = useDispatch();
   useEffect(() => {
     console.log('Auth inside useEffect');
   }, []);
-  const history = useHistory();
-  const dispatch = useDispatch();
   //// write functions
-  const handleSubmit = () => {};
-  const handleChange = () => {};
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (isSignup) {
+      dispatch(signup(formData, history));
+    } else {
+      dispatch(signin(formData, history));
+    }
+  };
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
   const handleShowPassword = () => {
     setShowPassword(!showPassword);
   };

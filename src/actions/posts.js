@@ -1,12 +1,12 @@
 // import dependencies
-import * as api from './../api/index.js';
+import * as api from '../api/index.js';
 import {
   FETCH_ALL,
   CREATE,
   UPDATE,
   DELETE,
   LIKE,
-} from './../constants/actionTypes.js';
+} from '../constants/actionTypes.js';
 
 // action creators
 //just work for sync-function
@@ -18,7 +18,8 @@ export const getPosts = () => async (dispatch) => {
     console.log('getPosts action-creator');
     dispatch({ type: FETCH_ALL, payload: data });
   } catch (error) {
-    console.error(error.message);
+    console.log(`${error.response.status}: ${error.response.data.message}`);
+    console.dir(error);
   }
 };
 
@@ -28,7 +29,8 @@ export const createPost = (post) => async (dispatch) => {
     console.log('createPost action-creator');
     dispatch({ type: CREATE, payload: data });
   } catch (error) {
-    console.log(error);
+    console.log(`${error.response.status}: ${error.response.data.message}`);
+    console.dir(error);
   }
 };
 export const updatePost = (id, post) => async (dispatch) => {
@@ -37,7 +39,8 @@ export const updatePost = (id, post) => async (dispatch) => {
     console.log('updatePost action-creator');
     dispatch({ type: UPDATE, payload: data });
   } catch (error) {
-    console.log(error);
+    console.log(`${error.response.status}: ${error.response.data.message}`);
+    console.dir(error);
   }
 };
 
@@ -47,7 +50,8 @@ export const deletePost = (id) => async (dispatch) => {
     console.log('deletePost action-creator');
     dispatch({ type: DELETE, payload: id });
   } catch (error) {
-    console.log(error);
+    console.log(`${error.response.status}: ${error.response.data.message}`);
+    console.dir(error);
   }
 };
 
@@ -56,6 +60,7 @@ export const likePost = (id) => async (dispatch) => {
     const { data } = await api.likePost(id);
     dispatch({ type: LIKE, payload: data });
   } catch (error) {
-    console.log(error);
+    console.log(`${error.response.status}: ${error.response.data.message}`);
+    console.dir(error);
   }
 };
