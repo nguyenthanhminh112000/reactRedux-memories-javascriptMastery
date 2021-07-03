@@ -10,17 +10,15 @@ console.log('Form outside');
 const Form = ({ currentId, setCurrentId }) => {
   // using hooks
   const [postData, setPostData] = useState({
-    creator: '',
     title: '',
     message: '',
     tags: [],
     selectedFile: '',
-    idk: ['Nguyen T Minh', 'T dat', 'T hien'],
   });
   const post = useSelector((state) =>
     currentId ? state.posts.find((p) => p._id === currentId) : null
   );
-
+  const user = JSON.parse(localStorage.getItem('auth'))?.authData;
   useEffect(() => {
     console.log('Form inside useEffect ');
     if (post) {
@@ -48,18 +46,25 @@ const Form = ({ currentId, setCurrentId }) => {
     e.preventDefault();
     // handleValidForm();
     if (currentId) {
-      dispatch(updatePost(currentId, postData));
+      dispatch(
+        updatePost(currentId, {
+          ...postData,
+          name: user?.result?.name,
+        })
+      );
     } else {
-      dispatch(createPost(postData));
+      dispatch(
+        createPost({
+          ...postData,
+          name: user?.result?.name,
+        })
+      );
     }
     handleClearForm();
   };
   const handleFormChange = (e) => {
     const field = e.target.name;
     switch (field) {
-      case 'creator':
-        setPostData({ ...postData, creator: e.target.value });
-        break;
       case 'title':
         setPostData({ ...postData, title: e.target.value });
         break;
@@ -84,7 +89,6 @@ const Form = ({ currentId, setCurrentId }) => {
   };
   const handleClearForm = () => {
     setPostData({
-      creator: '',
       title: '',
       message: '',
       tags: [],
@@ -92,6 +96,15 @@ const Form = ({ currentId, setCurrentId }) => {
     });
     setCurrentId(null);
   };
+  if (!user) {
+    return (
+      <Paper className={classes.paper}>
+        <Typography variant='h6' align='center'>
+          Please Sign In to create your own memories and like other's memories.
+        </Typography>
+      </Paper>
+    );
+  }
   return (
     <div>
       {console.log('Form inside return')}
@@ -107,14 +120,6 @@ const Form = ({ currentId, setCurrentId }) => {
             {currentId ? 'Editing' : 'Creating'} a Memory
           </Typography>
           <TextField
-            name='creator'
-            variant='outlined'
-            label='Creator'
-            fullWidth
-            value={postData.creator}
-            onChange={handleFormChange}
-          />
-          <TextField
             name='title'
             variant='outlined'
             label='Title'
@@ -125,7 +130,7 @@ const Form = ({ currentId, setCurrentId }) => {
           <TextField
             name='tags'
             variant='outlined'
-            label='Tags'
+            label='Tags(separated by comma)'
             fullWidth
             value={postData.tags}
             onChange={handleFormChange}

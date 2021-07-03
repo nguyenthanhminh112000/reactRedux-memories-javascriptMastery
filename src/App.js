@@ -1,5 +1,5 @@
 // import dependencies
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Container } from '@material-ui/core';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 // import Components
@@ -17,7 +17,16 @@ const App = () => {
         <Navbar />
         <Switch>
           <Route path='/auth' exact component={Auth} />
-          <Route path='/' component={Home} />
+          <Route
+            path='/'
+            render={() => {
+              return (
+                <Fragment>
+                  <Home />
+                </Fragment>
+              );
+            }}
+          />
         </Switch>
       </Container>
     </Router>

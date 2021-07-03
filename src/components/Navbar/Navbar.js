@@ -1,22 +1,29 @@
 import React, { useEffect } from 'react';
 import memories from './../../images/memories.png';
 import { AppBar, Typography, Toolbar, Avatar, Button } from '@material-ui/core';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import decode from 'jwt-decode';
 import useStyles from './styles.js';
 console.log('Navbar outside');
 const Navbar = () => {
   /// using hooks
   const classes = useStyles();
   const history = useHistory();
+  const location = useLocation();
   const user = useSelector((state) => state.auth?.authData);
   // const [user, setUser] = useState({ authData });
   const dispatch = useDispatch();
   useEffect(() => {
     console.log('Navbar inside useEffect');
-    ////
-    // // setUser(JSON.parse(localStorage.getItem('profile')));
-  }, []);
+    const token = user?.token;
+    if (token) {
+      const decodedToken = decode(token);
+      if (decodedToken.exp * 1000 < new Date().getTime()) {
+        logout();
+      }
+    }
+  });
   console.log('Navbar inside');
   ////// write functions
   const logout = () => {

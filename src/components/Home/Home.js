@@ -8,6 +8,7 @@ import Posts from './../../components/Posts/Posts.js';
 //// import files
 // import useStyle from './styles.js';
 import { getPosts } from '../../actions/posts.js';
+import { Link } from 'react-router-dom';
 console.log('Home outside');
 const Home = () => {
   //   const classes = useStyle();
@@ -38,6 +39,7 @@ const Home = () => {
             <Form currentId={currentId} setCurrentId={setCurrentId} />
           </Grid>
         </Grid>
+        <Link to='/auth'>Auth</Link>
       </Container>
     </Grow>
   );

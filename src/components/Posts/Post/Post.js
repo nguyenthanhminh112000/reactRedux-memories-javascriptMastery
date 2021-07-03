@@ -10,6 +10,7 @@ import {
 } from '@material-ui/core';
 import moment from 'moment';
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
+import ThumbUpAltOutlined from '@material-ui/icons/ThumbUpAltOutlined';
 import DeleteIcon from '@material-ui/icons/Delete';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import { useDispatch } from 'react-redux';
@@ -21,13 +22,47 @@ console.log('Post outside');
 const Post = ({ post, setCurrentId }) => {
   //using hooks
   console.log('Post inside');
+  const user = JSON.parse(localStorage.getItem('auth'))?.authData;
   const dispatch = useDispatch();
   useEffect(() => {
     console.log('Post inside useEffect');
   }, []);
   const classes = useStyles();
-  //write functions and features
+  // write likes component
+  const Likes = () => {
+    if (post.likes.length > 0) {
+      //post have at least 1 person liked
+      return post.likes.find(
+        (like) => like === user?.result?.googleId || like === user?.result?.id
+      ) ? (
+        // I liked the post
+        <>
+          <ThumbUpAltIcon fontSize='small' />
+          &nbsp;
+          {post.likes.length > 2
+            ? // i liked the post with at least 2 others
+              `You and ${post.likes.length - 1} others`
+            : `${post.likes.length > 1 ? 'You and another' : 'You'}`}
+        </>
+      ) : (
+        // i didnt like the post
+        <>
+          <ThumbUpAltOutlined fontSize='small' />
+          &nbsp;{post.likes.length} {post.likes.length === 1 ? 'Like' : 'Likes'}
+        </>
+      );
+    } else {
+      // post have no one likes
+      return (
+        <>
+          <ThumbUpAltOutlined fontSize='small' />
+          &nbsp;Like
+        </>
+      );
+    }
+  };
 
+  //write functions and features
   const handleChangeCurrentId = () => {
     setCurrentId(post._id);
   };
@@ -45,21 +80,24 @@ const Post = ({ post, setCurrentId }) => {
         image={post.selectedFile || defaultPostImage}
       />
       <div className={classes.overlay}>
-        <Typography variant='h6'>{post.creator}</Typography>
+        <Typography variant='h6'>{post.name}</Typography>
         <Typography variant='body2'>
           {moment(post.createAt).fromNow()}
         </Typography>
       </div>
-      <div className={classes.overlay2}>
-        <Button
-          style={{ color: 'white' }}
-          size='small'
-          onClick={handleChangeCurrentId}
-        >
-          <MoreHorizIcon fontSize='default' />
-        </Button>
-      </div>
 
+      {(user?.result?.id === post?.creator ||
+        user?.result?.googleId === post?.creator) && (
+        <div className={classes.overlay2}>
+          <Button
+            style={{ color: 'white' }}
+            size='small'
+            onClick={handleChangeCurrentId}
+          >
+            <MoreHorizIcon fontSize='default' />
+          </Button>
+        </div>
+      )}
       <div>
         <Typography variant='h5' className={classes.title} gutterBottom>
           {post.title}
@@ -76,13 +114,20 @@ const Post = ({ post, setCurrentId }) => {
         </Typography>
       </CardContent>
       <CardActions className={classes.cardActions}>
-        <Button size='small' color='primary' onClick={handleLikePost}>
-          <ThumbUpAltIcon fontSize='small' />
-          &nbsp; Like {post.likeCount}
+        <Button
+          size='small'
+          color='primary'
+          disabled={!user}
+          onClick={handleLikePost}
+        >
+          <Likes />
         </Button>
-        <Button size='small' color='primary' onClick={handleDeletePost}>
-          <DeleteIcon fontSize='small' /> Delete
-        </Button>
+        {(user?.result?.id === post?.creator ||
+          user?.result?.id === post?.creator) && (
+          <Button size='small' color='primary' onClick={handleDeletePost}>
+            <DeleteIcon fontSize='small' /> Delete
+          </Button>
+        )}
       </CardActions>
     </Card>
   );
