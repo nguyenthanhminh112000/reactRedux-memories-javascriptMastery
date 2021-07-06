@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
-import memories from './../../images/memories.png';
+import memoriesLogo from './../../images/memories-Logo.png';
+import memoriesText from './../../images/memories-Text.png';
 import { AppBar, Typography, Toolbar, Avatar, Button } from '@material-ui/core';
 import { Link, useHistory, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -31,24 +32,15 @@ const Navbar = () => {
   };
   return (
     <AppBar className={classes.appBar} position='static' color='inherit'>
-      <div className={classes.brandContainer}>
-        <Typography
-          component={Link}
-          to='/'
-          className={classes.heading}
-          variant='h1'
-          align='center'
-        >
-          Memories
-          {console.log('Navbar inside return')}
-        </Typography>
+      <Link to='/' className={classes.brandContainer}>
+        <img src={memoriesText} alt='logoText' height='45px' />
         <img
           className={classes.image}
-          src={memories}
-          alt='memories'
-          height='60'
+          src={memoriesLogo}
+          alt='logo'
+          height='40px'
         />
-      </div>
+      </Link>
       <Toolbar className={classes.toolbar}>
         {user ? (
           <div className={classes.profile}>
@@ -79,6 +71,7 @@ const Navbar = () => {
             color='primary'
           >
             Sign In
+            {console.log('Navbar inside return')}
           </Button>
         )}
       </Toolbar>

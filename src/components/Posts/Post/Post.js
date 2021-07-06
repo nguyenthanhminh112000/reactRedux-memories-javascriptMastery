@@ -73,7 +73,7 @@ const Post = ({ post, setCurrentId }) => {
     dispatch(likePost(post._id));
   };
   return (
-    <Card className={classes.card}>
+    <Card className={classes.card} raised elevation={6}>
       {console.log('Post inside return')}
       <CardMedia
         className={classes.media}
