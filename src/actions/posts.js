@@ -6,15 +6,16 @@ import {
   UPDATE,
   DELETE,
   LIKE,
+  FETCH_BY_SEARCH,
 } from '../constants/actionTypes.js';
 
 // action creators
 //just work for sync-function
 // export const getPosts = () => ({ type: 'FETCH_ALL', payload: [] });
 
-export const getPosts = () => async (dispatch) => {
+export const getPosts = (searchQuery) => async (dispatch) => {
   try {
-    const { data } = await api.fetchPosts();
+    const { data } = await api.fetchPosts(searchQuery);
     console.log('getPosts action-creator');
     dispatch({ type: FETCH_ALL, payload: data });
   } catch (error) {
@@ -22,7 +23,16 @@ export const getPosts = () => async (dispatch) => {
     console.dir(error);
   }
 };
-
+export const getPostsBySearch = (searchQuery) => async (dispatch) => {
+  try {
+    const { data } = await api.fetchPostsBySearch(searchQuery);
+    console.log('getPostsBySearch action-creator');
+    dispatch({ type: FETCH_BY_SEARCH, payload: data });
+  } catch (error) {
+    console.log(`${error.response.status}: ${error.response.data.message}`);
+    console.dir(error);
+  }
+};
 export const createPost = (post) => async (dispatch) => {
   try {
     const { data } = await api.createPost(post);

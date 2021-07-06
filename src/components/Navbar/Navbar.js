@@ -12,7 +12,6 @@ const Navbar = () => {
   const history = useHistory();
   const location = useLocation();
   const user = useSelector((state) => state.auth?.authData);
-  // const [user, setUser] = useState({ authData });
   const dispatch = useDispatch();
   useEffect(() => {
     console.log('Navbar inside useEffect');
@@ -27,10 +26,8 @@ const Navbar = () => {
   console.log('Navbar inside');
   ////// write functions
   const logout = () => {
-    console.log('logout');
     dispatch({ type: 'LOGOUT' });
     history.push('/');
-    // setUser(null);
   };
   return (
     <AppBar className={classes.appBar} position='static' color='inherit'>

@@ -1,7 +1,9 @@
 import { AUTH, LOGOUT } from './../constants/actionTypes.js';
 
 const authReducer = (
-  state = JSON.parse(localStorage.getItem('auth')),
+  state = !JSON.parse(localStorage.getItem('auth'))
+    ? null
+    : JSON.parse(localStorage.getItem('auth')),
   action
 ) => {
   switch (action.type) {
