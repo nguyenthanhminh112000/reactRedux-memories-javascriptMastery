@@ -10,10 +10,13 @@ const Posts = ({ setCurrentId }) => {
   useEffect(() => {
     console.log('Posts inside useEffect ');
   }, []);
-  const posts = useSelector((state) => state.posts);
+  const { posts, isLoading } = useSelector((state) => state.posts);
   console.log('Posts inside');
   const classes = useStyles();
-  return !posts.length ? (
+  if (!isLoading && !posts.length) {
+    return <div>No posts</div>;
+  }
+  return isLoading ? (
     <CircularProgress />
   ) : (
     <Grid
@@ -24,7 +27,7 @@ const Posts = ({ setCurrentId }) => {
     >
       {console.log('Posts inside return')}
       {posts.map((post) => (
-        <Grid key={post._id} item xs={12} sm={12} md={6} lg={3}>
+        <Grid key={post._id} item xs={12} sm={12} md={6} lg={4}>
           <Post post={post} setCurrentId={setCurrentId} />
         </Grid>
       ))}

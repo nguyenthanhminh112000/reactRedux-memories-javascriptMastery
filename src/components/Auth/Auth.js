@@ -158,7 +158,7 @@ const Auth = () => {
               </Button>
             </Grid>
           </Grid>
-          <Link to='/'>Home</Link>
+          <Link to='/test'>Home</Link>
         </form>
       </Paper>
     </Container>

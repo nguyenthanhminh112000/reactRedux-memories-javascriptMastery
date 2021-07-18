@@ -35,12 +35,12 @@ const Home = () => {
   const query = useQuery();
   const page = query.get('page') || 1;
   const searchQuery = query.get('searchQuery');
+  const tagsQuery = query.get('tags');
   const dispatch = useDispatch();
   const history = useHistory();
   useEffect(() => {
     console.log('Home inside useEffect ');
-    dispatch(getPosts());
-  }, [dispatch]);
+  }, []);
   console.log('Home inside');
   /////////write functions
   const handleChangeSearch = (e) => {
@@ -117,8 +117,10 @@ const Home = () => {
               </Button>
             </AppBar>
             <Form currentId={currentId} setCurrentId={setCurrentId} />
-            <Paper elevation={6}>
-              <Pagination />
+            <Paper elevation={6} className={classes.pagination}>
+              {searchQuery !== 'none' && tagsQuery !== 'none' && (
+                <Pagination page={page} />
+              )}
             </Paper>
           </Grid>
         </Grid>

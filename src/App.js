@@ -30,7 +30,15 @@ const App = () => {
             exact
             render={() => (!user ? <Auth /> : <Redirect to='/posts' />)}
           />
-          <Route path='/posts' exact render={() => <Home />} />
+          <Route
+            path='/posts'
+            exact
+            render={() => (
+              <>
+                <Home />
+              </>
+            )}
+          />
           <Route path='/posts/search' exact render={() => <Home />} />
           <Route path='/posts/:id' exact render={() => <PostDetails />} />
           <Route path='/' render={() => <Redirect to='/posts' />} />
