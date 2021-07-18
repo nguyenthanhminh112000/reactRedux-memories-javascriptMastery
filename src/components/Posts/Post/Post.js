@@ -1,5 +1,5 @@
 //import dependencies
-import React, { useEffect } from 'react';
+import React from 'react';
 import {
   Card,
   CardActions,
@@ -20,16 +20,12 @@ import { useHistory } from 'react-router';
 import useStyles from './styles.js';
 import { deletePost, likePost } from './../../../actions/posts.js';
 import defaultPostImage from './../../../images/defaultPost.png';
-console.log('Post outside');
 const Post = ({ post, setCurrentId }) => {
   //using hooks
-  console.log('Post inside');
   const user = JSON.parse(localStorage.getItem('auth'))?.authData;
   const history = useHistory();
   const dispatch = useDispatch();
-  useEffect(() => {
-    console.log('Post inside useEffect');
-  }, []);
+
   const classes = useStyles();
   // write likes component
   const Likes = () => {
@@ -80,7 +76,6 @@ const Post = ({ post, setCurrentId }) => {
   };
   return (
     <Card className={classes.card} raised elevation={6}>
-      {console.log('Post inside return')}
       <ButtonBase className={classes.cardAction} onClick={openPost}>
         <CardMedia
           className={classes.media}

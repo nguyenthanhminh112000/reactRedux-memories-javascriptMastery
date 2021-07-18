@@ -14,14 +14,11 @@ import Home from './components/Home/Home.js';
 import Auth from './components/Auth/Auth.js';
 import PostDetails from './components/PostDetails/PostDetails.js';
 // import file
-console.log('App outside');
 const App = () => {
-  console.log('App inside');
   const user = useSelector((state) => state.auth?.authData);
   // const user = JSON.parse(localStorage.getItem('auth'));
   return (
     <Router>
-      {console.log('App inside return')}
       <Container maxWidth='xl'>
         <Navbar />
         <Switch>

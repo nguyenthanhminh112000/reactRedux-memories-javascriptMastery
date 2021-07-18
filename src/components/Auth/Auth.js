@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {
   Avatar,
   Button,
@@ -16,7 +16,6 @@ import useStyles from './styles';
 import Input from './Input.js';
 import Icon from './Icon.js';
 import { signin, signup } from '../../actions/auth.js';
-console.log('Auth outside');
 const initialState = {
   firstName: '',
   lastName: '',
@@ -32,9 +31,7 @@ const Auth = () => {
   const classes = useStyles();
   const history = useHistory();
   const dispatch = useDispatch();
-  useEffect(() => {
-    console.log('Auth inside useEffect');
-  }, []);
+
   //// write functions
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -55,8 +52,6 @@ const Auth = () => {
     setShowPassword(false);
   };
   const googleSuccess = (res) => {
-    console.log('Google sign in was success');
-    console.log(res);
     const result = res?.profileObj;
     const token = res?.tokenId;
     try {
@@ -67,10 +62,8 @@ const Auth = () => {
     }
   };
   const googleFailure = (error) => {
-    console.log('Google sign in was failure');
     console.log(error);
   };
-  console.log('Auth inside');
   return (
     <Container component='main' maxWidth='xs'>
       <Paper className={classes.paper} elevation={3}>
@@ -78,7 +71,6 @@ const Auth = () => {
           <LockOutlinedIcon />
         </Avatar>
         <Typography variant='h5'>{isSignup ? 'Sign Up' : 'Sign In'}</Typography>
-        {console.log('Auth inside return')}
         <form className={classes.form} onSubmit={handleSubmit}>
           <Grid container spacing={2}>
             {isSignup && (
@@ -158,7 +150,6 @@ const Auth = () => {
               </Button>
             </Grid>
           </Grid>
-          <Link to='/test'>Home</Link>
         </form>
       </Paper>
     </Container>

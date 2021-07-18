@@ -8,7 +8,6 @@ const authReducer = (
 ) => {
   switch (action.type) {
     case AUTH:
-      console.log(action?.payload);
       localStorage.setItem(
         'auth',
         JSON.stringify({ authData: { ...action?.payload } })

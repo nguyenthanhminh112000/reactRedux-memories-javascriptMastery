@@ -9,7 +9,6 @@ import App from './App.js';
 import './index.css';
 //import reducer
 import allReducers from './reducers/index.js';
-console.log('Index outside');
 const store = createStore(
   allReducers,
   compose(

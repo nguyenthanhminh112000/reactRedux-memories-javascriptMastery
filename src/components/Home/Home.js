@@ -1,5 +1,5 @@
 /////////import dependencies
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import {
   Container,
@@ -13,14 +13,13 @@ import {
 import { Link, useHistory, useLocation } from 'react-router-dom';
 import ChipInput from 'material-ui-chip-input';
 //// import files
-import { getPosts, getPostsBySearch } from '../../actions/posts.js';
+import { getPostsBySearch } from '../../actions/posts.js';
 /// import components
 import Form from './../../components/Form/Form.js';
 import Posts from './../../components/Posts/Posts.js';
 import Pagination from '../Pagination.js';
 // import useStyle from './styles.js';
 import useStyles from './styles.js';
-console.log('Home outside');
 const useQuery = () => {
   return new URLSearchParams(useLocation().search);
 };
@@ -38,10 +37,7 @@ const Home = () => {
   const tagsQuery = query.get('tags');
   const dispatch = useDispatch();
   const history = useHistory();
-  useEffect(() => {
-    console.log('Home inside useEffect ');
-  }, []);
-  console.log('Home inside');
+
   /////////write functions
   const handleChangeSearch = (e) => {
     setSearch(e.target.value);
@@ -82,7 +78,6 @@ const Home = () => {
         >
           <Grid item xs={12} sm={6} md={9}>
             <Posts setCurrentId={setCurrentId} />
-            {console.log('Home inside return')}
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
             <AppBar
@@ -124,7 +119,6 @@ const Home = () => {
             </Paper>
           </Grid>
         </Grid>
-        <Link to='/auth'>Auth</Link>
       </Container>
     </Grow>
   );

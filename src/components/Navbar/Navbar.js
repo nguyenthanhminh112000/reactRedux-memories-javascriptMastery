@@ -6,7 +6,6 @@ import { Link, useHistory, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import decode from 'jwt-decode';
 import useStyles from './styles.js';
-console.log('Navbar outside');
 const Navbar = () => {
   /// using hooks
   const classes = useStyles();
@@ -15,7 +14,6 @@ const Navbar = () => {
   const user = useSelector((state) => state.auth?.authData);
   const dispatch = useDispatch();
   useEffect(() => {
-    console.log('Navbar inside useEffect');
     const token = user?.token;
     if (token) {
       const decodedToken = decode(token);
@@ -24,7 +22,6 @@ const Navbar = () => {
       }
     }
   });
-  console.log('Navbar inside');
   ////// write functions
   const logout = () => {
     dispatch({ type: 'LOGOUT' });
@@ -71,7 +68,6 @@ const Navbar = () => {
             color='primary'
           >
             Sign In
-            {console.log('Navbar inside return')}
           </Button>
         )}
       </Toolbar>

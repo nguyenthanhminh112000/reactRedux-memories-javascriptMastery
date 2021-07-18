@@ -8,13 +8,11 @@ import {
 } from '@material-ui/core/';
 import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 ///// import from files
-import { getPost, getPostsBySearch } from '../../actions/posts';
+import { getPost } from '../../actions/posts';
 import useStyles from './styles';
-console.log('PostDetails outside');
 const PostDetails = () => {
-  console.log('PostDetails inside');
   // using hooks
   const { post, posts, isLoading } = useSelector((state) => state.posts);
   const { id } = useParams();
@@ -22,11 +20,9 @@ const PostDetails = () => {
   const classes = useStyles();
   useEffect(() => {
     dispatch(getPost(id));
-    console.log('PostDetails inside useEffect1');
   }, [id]);
   //writes functions
   if (isLoading) {
-    console.log('----------------------------------', 'loading');
     return (
       <Paper elevation={6} className={classes.loadingPaper}>
         <CircularProgress size='7em' />
@@ -34,15 +30,12 @@ const PostDetails = () => {
     );
   }
   if (!post) {
-    console.log('----------------------------------', 'set up');
     return null;
   }
   return (
     <Paper style={{ padding: '20px', borderRadius: '15px' }} elevation={6}>
       <div className={classes.card}>
         <div className={classes.section}>
-          {console.log('PostDetails inside return')}
-
           <Typography variant='h3' component='h2'>
             {post.title}
           </Typography>

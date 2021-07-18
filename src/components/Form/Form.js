@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { createPost, updatePost } from './../../actions/posts.js';
 // import styles
 import useStyles from './styles.js';
-console.log('Form outside');
 const Form = ({ currentId, setCurrentId }) => {
   // using hooks
   const [postData, setPostData] = useState({
@@ -20,28 +19,13 @@ const Form = ({ currentId, setCurrentId }) => {
   );
   const user = JSON.parse(localStorage.getItem('auth'))?.authData;
   useEffect(() => {
-    console.log('Form inside useEffect ');
     if (post) {
       setPostData(post);
     }
   }, [post]);
   const dispatch = useDispatch();
   const classes = useStyles();
-  console.log('Form inside');
-  // write functions
-  // const handleValidForm = () => {
-  //   setPostData({
-  //     ...postData,
-  //     tags: postData.tags.map((tag) => tag.replaceAll(' ', '')),
-  //   });
 
-  //   for (let i = 0; i < postData.length; i++) {
-  //     if (!postData.tags[i]) {
-  //       postData.splice(i);
-  //     }
-  //   }
-  //   console.log('------------------From handleValidForm', postData);
-  // };
   const handleSubmit = (e) => {
     e.preventDefault();
     // handleValidForm();
@@ -81,11 +65,9 @@ const Form = ({ currentId, setCurrentId }) => {
       default:
         break;
     }
-    console.log('form is changed');
   };
   const handleFileInput = ({ base64 }) => {
     setPostData({ ...postData, selectedFile: base64 });
-    console.log('file is changed');
   };
   const handleClearForm = () => {
     setPostData({
@@ -107,8 +89,6 @@ const Form = ({ currentId, setCurrentId }) => {
   }
   return (
     <div>
-      {console.log('Form inside return')}
-
       <Paper className={classes.paper} elevation={6}>
         <form
           autoComplete='off'
