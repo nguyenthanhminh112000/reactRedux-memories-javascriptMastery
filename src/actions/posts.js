@@ -24,7 +24,6 @@ export const getPost = (id) => async (dispatch) => {
     dispatch({ type: END_LOADING });
   } catch (error) {
     dispatch({ type: END_LOADING });
-    console.log(`${error?.response?.status}: ${error?.response?.data.message}`);
     console.dir(error);
   }
 };
@@ -37,7 +36,6 @@ export const getPosts = (page) => async (dispatch) => {
     dispatch({ type: END_LOADING });
   } catch (error) {
     dispatch({ type: END_LOADING });
-    console.log(`${error.response.status}: ${error.response.data.message}`);
     console.dir(error);
   }
 };
@@ -48,9 +46,6 @@ export const getPostsBySearch = (searchQuery) => async (dispatch) => {
     dispatch({ type: FETCH_BY_SEARCH, payload: data });
     dispatch({ type: END_LOADING });
   } catch (error) {
-    console.log(
-      `${error?.response?.status}: ${error?.response?.data?.message}`
-    );
     console.dir(error);
   }
 };
@@ -62,7 +57,6 @@ export const createPost = (post) => async (dispatch) => {
     dispatch({ type: END_LOADING });
   } catch (error) {
     dispatch({ type: END_LOADING });
-    console.log(`${error.response.status}: ${error.response.data.message}`);
     console.dir(error);
   }
 };
@@ -71,7 +65,6 @@ export const updatePost = (id, post) => async (dispatch) => {
     const { data } = await api.updatePost(id, post);
     dispatch({ type: UPDATE, payload: data });
   } catch (error) {
-    console.log(`${error.response.status}: ${error.response.data.message}`);
     console.dir(error);
   }
 };
@@ -81,7 +74,6 @@ export const deletePost = (id) => async (dispatch) => {
     await api.deletePost(id);
     dispatch({ type: DELETE, payload: id });
   } catch (error) {
-    console.log(`${error.response.status}: ${error.response.data.message}`);
     console.dir(error);
   }
 };
@@ -91,7 +83,6 @@ export const likePost = (id) => async (dispatch) => {
     const { data } = await api.likePost(id);
     dispatch({ type: LIKE, payload: data });
   } catch (error) {
-    console.log(`${error.response.status}: ${error.response.data.message}`);
     console.dir(error);
   }
 };

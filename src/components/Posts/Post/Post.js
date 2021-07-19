@@ -90,7 +90,7 @@ const Post = ({ post, setCurrentId }) => {
 
         {(user?.result?.id === post?.creator ||
           user?.result?.googleId === post?.creator) && (
-          <div className={classes.overlay2}>
+          <div className={classes.overlay2} style={{ zIndex: 999 }}>
             <Button
               style={{ color: 'white' }}
               size='small'

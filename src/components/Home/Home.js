@@ -10,7 +10,7 @@ import {
   TextField,
   Button,
 } from '@material-ui/core';
-import { Link, useHistory, useLocation } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import ChipInput from 'material-ui-chip-input';
 //// import files
 import { getPostsBySearch } from '../../actions/posts.js';

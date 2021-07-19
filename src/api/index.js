@@ -1,6 +1,8 @@
 import axios from 'axios';
 
-const API = axios.create({ baseURL: 'http://localhost:5000/api/v1' });
+const API = axios.create({
+  baseURL: 'https://api-memoriesapp.herokuapp.com/api/v1',
+});
 API.interceptors.request.use((req) => {
   if (localStorage.getItem('auth')) {
     req.headers.Authorization = `Bearer ${
